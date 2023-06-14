@@ -99,8 +99,8 @@ keys = [
 # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
+    Key([mod], "Left", lazy.group.prev_window()),
+    Key([mod], "Right", lazy.group.next_window()),
 
 
 # RESIZE UP, DOWN, LEFT, RIGHT
@@ -686,7 +686,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='archlinux-logout'),
     Match(wm_class='xfce4-terminal'),
 
-],  fullscreen_border_width = 0, border_width = 0)
+],  fullscreen_border_width = 0, border_width = 1, border_focus=colors[3])
 auto_fullscreen = False
 
 focus_on_window_activation = "focus" # or smart
