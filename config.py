@@ -60,6 +60,13 @@ def window_to_next_group(qtile):
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
 
+# @lazy.function
+# def float_to_front(qtile):
+#     for window in qtile.currentGroup.windows:
+#         if window.floating:
+#             window.cmd_bring_to_front()
+
+
 
 if True:
     vol_cur  = None
@@ -93,12 +100,12 @@ keys = [
 
 
 # QTILE LAYOUT KEYS
-    Key([mod], "n", lazy.layout.normalize()),
+    # Key([mod], "n", float_to_front()),
     Key([mod], "space", lazy.next_layout()),
 
 # CHANGE FOCUS
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
+    # Key([mod], "Up", lazy.layout.up()),
+    # Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Left", lazy.group.prev_window()),
     Key([mod], "Right", lazy.group.next_window()),
 
@@ -137,6 +144,12 @@ keys = [
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),
 
     ]
+
+
+
+keys.extend([
+    Key([mod, "shift"], "s", lazy.spawn("sxhkd -c /home/raja/.config/qtile/sxhkd/sxhkdrc"), desc="powermenu"),
+    ])
 
 # def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
 #     i = qtile.screens.index(qtile.current_screen)
@@ -201,13 +214,14 @@ icons = {
 groups = []
 
 # FOR QWERTY KEYBOARDS
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14"]
+group_names = ["1", "2", "3", "c", "j", "n", "s", "k", "m", "e", "y","u","g","t","p","r"]
 
-group_labels = ["", "", "", "","","", "", "", "","","","","",""]
+group_labels = ["-1", "-2", "-3", "-C", "-J","-N","-S", "-K", "-M", "-E","-Y","-U","-G","-T","-P","-R"]
 #group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 
 match = [
+[""],
 #1
 [""],
 #2
@@ -235,7 +249,9 @@ match = [
 #13
 ["teams","microsoft teams - preview", "Microsoft Teams - Preview"],
 #14
-["alacritty"]
+["Steam","steam"],
+
+["Alacritty"]
 ]
 for i in range(len(group_names)):
     groups.append(
@@ -247,21 +263,25 @@ for i in range(len(group_names)):
         ))
 
 for index,i in enumerate(groups):
-    if index < 9:
+    if index < 3:
+
         keys.extend([
-
-    #CHANGE WORKSPACES
             Key([mod], i.name, lazy.group[i.name].toscreen()),
-            # Key([mod], "Tab", lazy.screen.next_group()),
-            # Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
-            # Key(["mod1"], "Tab", lazy.screen.next_group()),
-            # Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
-
-    # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-            Key(["mod1", "control"], i.name, lazy.window.togroup(i.name)),
-    # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-            Key(["mod1"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
         ])
+
+    keys.extend([
+        # Key([mod], "Tab", lazy.screen.next_group()),
+        # Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
+        # Key(["mod1"], "Tab", lazy.screen.next_group()),
+        # Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+        # Key([mod], i.name, lazy.group[i.name].toscreen()),
+
+
+# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
+        Key(["mod1", "control"], i.name, lazy.window.togroup(i.name)),
+# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
+        Key(["mod1"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
+    ])
 
 
 def init_layout_theme():
@@ -284,7 +304,7 @@ layouts = [
     # layout.Matrix(**layout_theme),
     # layout.Bsp(**layout_theme),
     # layout.Floating(**layout_theme),
-    layout.Max(**layout_theme, border_width=0)
+    # layout.Max(**layout_theme, border_width=0)
     # layout.RatioTile(**layout_theme),
 ]
 
@@ -532,12 +552,12 @@ def init_widgets_list():
                #          foreground = colors[2],
                #          background = colors[1]
                #          ),
-               widget.Systray(
-                        background=colors[1],
-                        icon_size=20,
-                        padding = 15,
-                        ),
-                           widget.Sep(**sep),
+               # widget.Systray(
+               #          background=colors[1],
+               #          icon_size=20,
+               #          padding = 15,
+               #          ),
+               #             widget.Sep(**sep),
 
 
               ]
@@ -548,6 +568,14 @@ widgets_list = init_widgets_list()
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
+    a=widget.Systray(
+        background=colors[1],
+        icon_size=20,
+        padding = 15,
+        )
+    b=widget.Sep(**sep)
+    widgets_screen1.append(a)
+    widgets_screen1.append(b)
     return widgets_screen1
 
 def init_widgets_screen2():
