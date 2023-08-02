@@ -25,7 +25,12 @@ run nitrogen --restore &
 
 keybLayout=$(setxkbmap -v | awk -F "+" '/symbols/ {print $2}')
 
-$HOME/.screenlayout/pasqal-setup.sh
+
+
+$HOME/.screenlayout/laptop.sh
+$HOME/.screenlayout/desktop.sh
+$HOME/.screenlayout/pasqal.sh
+
 
 if [ $keybLayout = "be" ]; then
   cp $HOME/.config/qtile/config-azerty.py $HOME/.config/qtile/config.py
@@ -54,10 +59,14 @@ blueberry-tray &
 picom --config $HOME/.config/qtile/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
-nitrogen --restore &
 run redshift &
 
 
+# /home/raja/.screenlayout/laptop.sh &
+# /home/raja/.screenlayout/desktop.sh &
+# /home/raja/.screenlayout/pasqal.sh &
+nitrogen --restore &
+qtile cmd-obj -o cmd -f reload_config
 
 #starting user applications at boot time
 # run volumeicon &

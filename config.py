@@ -106,8 +106,8 @@ keys = [
 # CHANGE FOCUS
     # Key([mod], "Up", lazy.layout.up()),
     # Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.group.prev_window()),
-    Key([mod], "Right", lazy.group.next_window()),
+    # Key([mod], "Left", lazy.group.prev_window()),
+    # Key([mod], "Right", lazy.group.next_window()),
 
 
 # RESIZE UP, DOWN, LEFT, RIGHT
@@ -135,7 +135,7 @@ keys = [
         ),
  
     Key([mod], "comma", lazy.layout.shuffle_left()),
-    Key([mod], "period", lazy.layout.shuffle_right()),
+    Key([mod], "period", lazy.group.next_window()),
 
 # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
@@ -148,7 +148,8 @@ keys = [
 
 
 keys.extend([
-    Key([mod, "shift"], "s", lazy.spawn("sxhkd -c /home/raja/.config/qtile/sxhkd/sxhkdrc"), desc="powermenu"),
+    Key([mod, "shift"], "s", lazy.spawn("sxhkd -c /home/raja/.config/qtile/sxhkd/sxhkdrc")),
+    Key([mod], "h", lazy.spawn("alacritty")),
     ])
 
 # def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
@@ -354,15 +355,15 @@ def init_widgets_list():
                         font="Bold Font Awesome",
                         fontsize = 17,
                         margin_y = 5,
-                        margin_x = 15,
-                        padding_x = 3,
+                        margin_x = 0,
+                        padding_x = 10,
                         borderwidth = 0,
                         disable_drag = True,
                         active = colors[3],
                         inactive = colors[9],
                         rounded = False,
-                        highlight_method = "text",
-                        this_current_screen_border = "#ffffff",
+                        highlight_method = "block",
+                        this_current_screen_border = "#777777",
                         foreground = colors[2],
                         background = colors[1]
                         ),
@@ -393,13 +394,14 @@ def init_widgets_list():
 
 
             widget.TaskList(
+                max_title_width=250,
                 icon_size=0,
                 background=colors[1],
-                foreground="#6699cc",
+                foreground="#888888",
 
                 highlight_method="text",
                 border=colors[3],
-                urgent_border=colors[3],
+                urgent_border="#ff0000",
             ),
 
 
@@ -592,9 +594,9 @@ widgets_screen3 = init_widgets_screen3()
 
 
 def init_screens():
-    return [Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), size=20, opacity=1)),
-            Screen(bottom=bar.Bar(widgets=init_widgets_screen2(), size=20, opacity=1)),
-            Screen(bottom=bar.Bar(widgets=init_widgets_screen3(), size=20, opacity=1))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=20, opacity=1)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=20, opacity=1)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen3(), size=20, opacity=1))]
 screens = init_screens()
 
 
@@ -713,7 +715,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='Galculator'),
     Match(wm_class='archlinux-logout'),
     Match(wm_class='xfce4-terminal'),
-
+    Match(wm_class='Pavucontrol'),
 ],  fullscreen_border_width = 0, border_width = 1, border_focus=colors[3])
 auto_fullscreen = False
 

@@ -2,13 +2,10 @@
 # SUPER + ... KEYS
 #################################################################
 
-#terminal 
-super +a
-    xfce4-terminal
 
 #vs code 2
 super + c
-    if ! pgrep code >/dev/null; then code&; fi; wmctrl -a code
+    if (( $(xdotool get_desktop)==3 )) || ! pgrep code >/dev/null; then code&; fi;xdotool set_desktop 3; wmctrl -a code
 
 
 #Notion 4
@@ -18,50 +15,50 @@ super + n
 
 #Sublime 5
 super + s
-    subl&
+    subl&;  xdotool set_desktop 6;
 
 
 #Slack 6
 super + k
-    slack&
+    slack&; xdotool set_desktop 7;
 
 
 #outlook 7
 super + m
-    if ! pgrep MSOutlook >/dev/null; then ms-outlook-nativefier& ; fi ;wmctrl -a outlook;
+     if ! pgrep MSOutlook >/dev/null; then ms-outlook-nativefier& ; fi ; xdotool set_desktop 8; wmctrl -a outlook;
 
 
 #thunar 8
 super + e
-    if ! pgrep thunar >/dev/null; then thunar& ; fi ; wmctrl -a thunar;
+    if (( $(xdotool get_desktop)==9 )) ||! pgrep thunar >/dev/null; then thunar& ; fi ; xdotool set_desktop 9; wmctrl -a thunar;
 
 
 #Telegram 9
 super + y
-    telegram-desktop& ; wmctrl -a telegram; wmctrl -a Telegram; wmctrl -a Diksha; wmctrl -a Corina;
+    telegram-desktop& ; xdotool set_desktop 10; wmctrl -a telegram; wmctrl -a Telegram; 
 
 #Telegram 9
 super + z
-    signal-desktop& ; wmctrl -a signal;
+    signal-desktop& ; xdotool set_desktop 10; wmctrl -a signal; 
 
 #Spotify 10
 super + u 
-   if ! pgrep spotify >/dev/null; then spotify& ; fi ; wmctrl -a spotify;
+   if ! pgrep spotify >/dev/null; then spotify& ; xdotool set_desktop 11; fi ; wmctrl -a spotify;
 
 
 #chrome 11
 super +g
-    if ! wmctrl -l | grep Chrome>/dev/null; then google-chrome-stable& ; fi ; wmctrl -a chrome;
+    if (( $(xdotool get_desktop)==12 )) || ! wmctrl -l | grep Chrome>/dev/null; then google-chrome-stable& ; fi ; xdotool set_desktop 12; wmctrl -a chrome;
 
 
 #Teams 12
 super + t
-    if ! pgrep teams >/dev/null; then teams&; fi ;wmctrl -a teams;
+    if ! pgrep teams >/dev/null; then teams&; fi ; xdotool set_desktop 13; wmctrl -a teams;
 
 
 #Alacritty
 super + r
-    if ! pgrep alacritty >/dev/null; then alacritty&; fi ; xdotool set_desktop 15; wmctrl -a alacritty;
+    if (( $(xdotool get_desktop)==15 )) || ! pgrep alacritty >/dev/null; then alacritty&; fi ; xdotool set_desktop 15; wmctrl -a alacritty;
 
 
 
@@ -72,7 +69,7 @@ super + r
 
 
 #Screenshot
-super + alt + p
+super + a
     flameshot gui
 
 #archlinux-logout
@@ -139,16 +136,17 @@ super + d
 
 #setting up screen configurations
 ctrl + alt + l
-    /home/raja/.screenlayout/laptop.sh && nitrogen --restore
+    /home/raja/.screenlayout/laptop.sh && nitrogen --restore &&  qtile cmd-obj -o cmd -f reload_config
 
 ctrl + alt + d
-    /home/raja/.screenlayout/desktop.sh && nitrogen --restore
+    /home/raja/.screenlayout/desktop.sh && nitrogen --restore &&  qtile cmd-obj -o cmd -f reload_config
 
 
-ctrl + alt + p
-    /home/raja/.screenlayout/pasqal.sh && nitrogen --restore
+ctrl + alt + q
+    /home/raja/.screenlayout/pasqal.sh && nitrogen --restore &&  qtile cmd-obj -o cmd -f reload_config
 
-
+ctrl + alt + h
+    systemctl hibernate
 
 
 ctrl + Up
