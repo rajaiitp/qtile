@@ -23,18 +23,10 @@ function run {
 
 run nitrogen --restore &
 
-keybLayout=$(setxkbmap -v | awk -F "+" '/symbols/ {print $2}')
 
 
 
-$HOME/.screenlayout/laptop.sh
-$HOME/.screenlayout/desktop.sh
-$HOME/.screenlayout/pasqal.sh
 
-
-if [ $keybLayout = "be" ]; then
-  cp $HOME/.config/qtile/config-azerty.py $HOME/.config/qtile/config.py
-fi
 
 #autostart ArcoLinux Welcome App
 # run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
@@ -50,23 +42,33 @@ fi
 #start sxhkd to replace Qtile native key-bindings
 
 
-run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 run clipit -n &
 run nm-applet &
-run xfce4-power-manager &
+# run xfce4-power-manager &
 numlockx on &
-blueberry-tray &
-picom --config $HOME/.config/qtile/scripts/picom.conf &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# blueberry-tray &
+# /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run redshift &
-
+xset s off -dpms
 
 # /home/raja/.screenlayout/laptop.sh &
 # /home/raja/.screenlayout/desktop.sh &
 # /home/raja/.screenlayout/pasqal.sh &
+# qtile cmd-obj -o cmd -f reload_config
+run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
+
+keybLayout=$(setxkbmap -v | awk -F "+" '/symbols/ {print $2}')
+
+
+# if [ $keybLayout = "be" ]; then
+#   cp $HOME/.config/qtile/config-azerty.py $HOME/.config/qtile/config.py
+# fi
+
+$HOME/.screenlayout/laptop.sh
 nitrogen --restore &
-qtile cmd-obj -o cmd -f reload_config
+picom &
+
 
 #starting user applications at boot time
 # run volumeicon &

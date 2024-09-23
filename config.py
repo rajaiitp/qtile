@@ -32,9 +32,8 @@ import subprocess
 from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile.widget import Spacer
-import arcobattery
 
 #mod4 or mod = super key
 mod = "mod4"
@@ -68,7 +67,7 @@ def window_to_next_group(qtile):
 
 
 
-if True:
+if False:
     vol_cur  = None
     vol_up   = "pactl set-sink-volume @DEFAULT_SINK@ +2%"
     vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -2%"
@@ -215,9 +214,9 @@ icons = {
 groups = []
 
 # FOR QWERTY KEYBOARDS
-group_names = ["1", "2", "3", "c", "j", "n", "s", "k", "m", "e", "y","u","g","t","p","r"]
+group_names = ["1", "2", "3", "4", "5", "6", "o", "k", "s", "e", "y","u","g","t","p","r"]
 
-group_labels = ["-1", "-2", "-3", "-C", "-J","-N","-S", "-K", "-M", "-E","-Y","-U","-G","-T","-P","-R"]
+group_labels = ["-1", "-2", "-3", "-4", "-5","-6","-O", "-K", "-S", "-E","-Y","-U","-G","-T","-P","-R"]
 #group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 
@@ -228,17 +227,17 @@ match = [
 #2
 [""],
 #3
-["code","Code"],
+[""],
 #4
 [""],
 #5
-["notion-app"],
+[],
 #6
-["subl"],
+["obsidian", "Obsidian"],
 #7
 ["teams","slack"],
 #8
-["msoutlook-nativefier-9dd141", "msoutlook-nativefier-9dd141"],
+["subl"],
 #9
 ["thunar", "Thunar"], 
 #10
@@ -260,11 +259,12 @@ for i in range(len(group_names)):
             name=group_names[i],
             layout="monadtall".lower(),
             label=group_labels[i],
-            matches=[Match(wm_class=match[i])],
+            matches=[Match(wm_class=re.compile(r"^(match[i])$"))]
+
         ))
 
 for index,i in enumerate(groups):
-    if index < 3:
+    if index < 6:
 
         keys.extend([
             Key([mod], i.name, lazy.group[i.name].toscreen()),
@@ -288,6 +288,9 @@ for index,i in enumerate(groups):
 def init_layout_theme():
     return {"margin":5,
             "border_focus": "#fab387",
+            # "border_focus": "#cf4d0a",
+
+            
             "border_normal": "#000000",
             }
 
@@ -498,7 +501,7 @@ def init_widgets_list():
                                 fontsize = 14,
                 **style
             ),
-            # widget.Sep(**sep),
+            widget.Sep(**sep),
 
 
             # # Light
@@ -604,7 +607,7 @@ screens = init_screens()
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag(["shift"], "Button1", lazy.window.set_size_floating(),
+    Drag([mod1], "Button1", lazy.window.set_size_floating(),
          start=lazy.window.get_size())
 ]
 
