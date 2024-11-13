@@ -11,50 +11,36 @@ super + c
 
 #Obsidian 5
 super + o
-    if ! pgrep electron ; then obsidian& ; fi ; xdotool set_desktop 6; wmctrl -a obsidian;
+    if ! pgrep electron ; then obsidian& ; fi ; xdotool set_desktop 4; wmctrl -a obsidian;
 
 
 
 #Slack 6
 super + k
-    slack&; xdotool set_desktop 7;
+    slack&; xdotool set_desktop 5;
 
 
 #outlook 7
 super + s
-    subl&;  xdotool set_desktop 8;
+    subl&;  xdotool set_desktop 4;
 
 #thunar 8
 super + e
-    if (( $(xdotool get_desktop)==9 )) ||! pgrep thunar >/dev/null; then thunar& ; fi ; xdotool set_desktop 9; wmctrl -a thunar;
-
-
-#Telegram 9
-super + y
-    telegram-desktop& ; xdotool set_desktop 10; wmctrl -a telegram; wmctrl -a Telegram; 
-
-#Telegram 9
-super + z
-    signal-desktop& ; xdotool set_desktop 10; wmctrl -a signal; 
-
-#Spotify 10
-super + u 
-   if ! pgrep spotify >/dev/null; then spotify& ; xdotool set_desktop 11; fi ; wmctrl -a spotify;
-
+    if (( $(xdotool get_desktop)==6 )) ||! pgrep thunar >/dev/null; then thunar& ; fi ; xdotool set_desktop 6; wmctrl -a thunar;
 
 #chrome 11
 super +g
-    if (( $(xdotool get_desktop)==12 )) || ! wmctrl -l | grep Chrome>/dev/null; then google-chrome-stable& ; fi ; xdotool set_desktop 12; wmctrl -a chrome;
+    if (( $(xdotool get_desktop)==7 )) || ! wmctrl -l | grep Chrome>/dev/null; then google-chrome-stable& ; fi ; xdotool set_desktop 7; wmctrl -a chrome;
 
 
 #Teams 12
 super + t
-    if ! pgrep teams >/dev/null; then teams&; fi ; xdotool set_desktop 13; wmctrl -a teams;
+    if ! pgrep teams >/dev/null; then teams&; fi ; xdotool set_desktop 8; wmctrl -a teams;
 
 
 #Alacritty
 super + r
-    if (( $(xdotool get_desktop)==15 )) || ! pgrep alacritty >/dev/null; then alacritty&; fi ; xdotool set_desktop 15; wmctrl -a alacritty;
+    if (( $(xdotool get_desktop)=9 )) || ! pgrep alacritty >/dev/null; then alacritty&; fi ; xdotool set_desktop 9; wmctrl -a alacritty;
 
 
 

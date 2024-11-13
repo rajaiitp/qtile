@@ -37,8 +37,8 @@ from libqtile.widget import Spacer
 
 #mod4 or mod = super key
 mod = "mod4"
-mod1 = "alt"
-mod2 = "control"
+# mod1 = "alt"
+# mod2 = "control"
 home = os.path.expanduser('~')
 battery      = "BAT0"
 
@@ -133,7 +133,7 @@ keys = [
         # lazy.layout.increase_nmaster(),
         ),
  
-    Key([mod], "comma", lazy.layout.shuffle_left()),
+    Key([mod], "comma", lazy.layout.swap_main()),
     Key([mod], "period", lazy.group.next_window()),
 
 # FLIP LAYOUT FOR MONADTALL/MONADWIDE
@@ -214,9 +214,9 @@ icons = {
 groups = []
 
 # FOR QWERTY KEYBOARDS
-group_names = ["1", "2", "3", "4", "5", "6", "o", "k", "s", "e", "y","u","g","t","p","r"]
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8","9","0"]
 
-group_labels = ["-1", "-2", "-3", "-4", "-5","-6","-O", "-K", "-S", "-E","-Y","-U","-G","-T","-P","-R"]
+group_labels = ["-1", "-2", "-3", "-4","-5", "-6","-7","-8","-9","-0"]
 #group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 
@@ -231,26 +231,16 @@ match = [
 #4
 [""],
 #5
-[],
+["subl", "obsidian", "Obsidian","slack"],
 #6
-["obsidian", "Obsidian"],
+[""],
 #7
-["teams","slack"],
+["thunar", "Thunar"],
 #8
-["subl"],
-#9
-["thunar", "Thunar"], 
-#10
-["telegram-desktop", "TelegramDesktop","signal", "Signal"],
-#11
-["spotify", "Spotify"],
-#12
 ["google-chrome", "Google-chrome"],
-#13
-["teams","microsoft teams - preview", "Microsoft Teams - Preview"],
-#14
-["Steam","steam"],
-
+#9
+["teams","slack"], 
+#0
 ["Alacritty"]
 ]
 for i in range(len(group_names)):
@@ -279,9 +269,9 @@ for index,i in enumerate(groups):
 
 
 # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-        Key(["mod1", "control"], i.name, lazy.window.togroup(i.name)),
+        Key(["mod1"], i.name, lazy.window.togroup(i.name)),
 # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key(["mod1"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
+        Key(["control"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
     ])
 
 
@@ -607,7 +597,7 @@ screens = init_screens()
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag([mod1], "Button1", lazy.window.set_size_floating(),
+    Drag(["mod1"], "Button1", lazy.window.set_size_floating(),
          start=lazy.window.get_size())
 ]
 
@@ -718,8 +708,8 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='Galculator'),
     Match(wm_class='archlinux-logout'),
     Match(wm_class='xfce4-terminal'),
-    Match(wm_class='Pavucontrol'),
-],  fullscreen_border_width = 0, border_width = 1, border_focus=colors[3])
+    Match(wm_class='pavucontrol'),
+],  fullscreen_border_width = 0, border_width = 0, border_focus=colors[3])
 auto_fullscreen = False
 
 focus_on_window_activation = "focus" # or smart
