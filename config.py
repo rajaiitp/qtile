@@ -254,11 +254,11 @@ for i in range(len(group_names)):
         ))
 
 for index,i in enumerate(groups):
-    if index < 6:
+    
 
-        keys.extend([
-            Key([mod], i.name, lazy.group[i.name].toscreen()),
-        ])
+    keys.extend([
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+    ])
 
     keys.extend([
         # Key([mod], "Tab", lazy.screen.next_group()),
@@ -319,7 +319,7 @@ def init_colors():
 
 colors = init_colors()
 sep = {
-    "padding": 15,
+    "padding": 20,
     "foreground" : colors[1]
 }
 
@@ -349,7 +349,7 @@ def init_widgets_list():
                         fontsize = 17,
                         margin_y = 5,
                         margin_x = 0,
-                        padding_x = 10,
+                        padding_x = 15,
                         borderwidth = 0,
                         disable_drag = True,
                         active = colors[3],
@@ -390,10 +390,11 @@ def init_widgets_list():
                 max_title_width=250,
                 icon_size=0,
                 background=colors[1],
-                foreground="#888888",
+                foreground=colors[3],
+                padding_x = 20,
 
-                highlight_method="text",
-                border=colors[3],
+                highlight_method="block",
+                border="#777777",
                 urgent_border="#ff0000",
             ),
 
@@ -426,11 +427,10 @@ def init_widgets_list():
                 ),
 
             widget.Clock(
-                        font="Noto Sans Bold",
-                        foreground = colors[5],
-                                                fontsize = 14,
-
-                        format="%H:%M "
+                font="Noto Sans Bold",
+                foreground = colors[5],
+                fontsize = 14,
+                format="%H:%M "
                 ),
 
             widget.Sep(**sep),
@@ -445,10 +445,10 @@ def init_widgets_list():
                 ),
 
             widget.Clock(
-                        font="Noto Sans Bold",
-                        foreground = colors[5],
-                        format="%a %b %d ",
-                                        fontsize = 14,
+                font="Noto Sans Bold",
+                foreground = colors[5],
+                format="%a %b %d ",
+                fontsize = 14,
                 ),
 
             widget.Sep(**sep),
@@ -460,7 +460,7 @@ def init_widgets_list():
                 text=icons["battery"],
                 foreground=colors[3],
                 font="Font Awesome",
-                                fontsize = 14,
+                fontsize = 14,
                 **style
             ),
             widget.Battery(
@@ -468,7 +468,7 @@ def init_widgets_list():
                 foreground=colors[5],
                 format="{percent:2.0%}",
                 low_foreground="#ff0000",
-                                fontsize = 14,
+                fontsize = 14,
                 **style
             ),
             widget.Sep(**sep),
@@ -482,13 +482,13 @@ def init_widgets_list():
                 text=icons["volume"],
                 foreground=colors[3],
                 font="Font Awesome",
-                                fontsize = 14,
+                fontsize = 14,
                 **style
             ),
             widget.Volume(
                 get_volume_command=(vol_cur.split() if vol_cur else None),
                 foreground=colors[5],
-                                fontsize = 14,
+                fontsize = 14,
                 **style
             ),
             widget.Sep(**sep),
