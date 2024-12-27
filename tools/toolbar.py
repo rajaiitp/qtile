@@ -54,7 +54,7 @@ icons = {
     "systray": "",  # fa-fedora
 }
 
-def init_widgets_list():
+def init_widgets_list_left():
     widgets_list = [
             widget.GroupBox(
                     text=icons["logo"],
@@ -96,6 +96,12 @@ def init_widgets_list():
                 urgent_border="#ff0000",
             ),
 
+        ]
+    return widgets_list
+
+
+def init_widgets_list_right():
+    widgets_list = [
 
             widget.TextBox(
                 text="",
@@ -103,6 +109,7 @@ def init_widgets_list():
                 font="Font Awesome",
                 fontsize = 14,
                 ),
+
 
             widget.Clock(
                 font="Noto Sans Bold",
@@ -158,7 +165,28 @@ def init_widgets_list():
                 fontsize = 14,
             ),
             widget.Sep(**sep),
+        ]
+
+    return widgets_list
 
 
-              ]
+
+
+def init_tray():
+    widgets_list = [
+
+        widget.Systray(
+            background=colors_1,
+            icon_size=20,
+            padding = 15,
+            ),
+        # tray = widget.StatusNotifier(
+        #     background=colors_1,
+        #     icon_size=20,
+        #     padding = 15,)
+        # b=widget.Sep(**sep)
+        widget.Sep(**sep),
+
+    ]           
+
     return widgets_list
