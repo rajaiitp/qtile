@@ -21,17 +21,17 @@ keys = [
     Key([mod], "Up", lazy.window.toggle_maximize()),  
     Key([mod], "Down", lazy.window.toggle_minimize()),  
     Key([mod, "shift"], "Space", lazy.window.toggle_floating()),
-    Key(["control"], "Up", lazy.spawn("pulsemixer --change-volume +5 --max-volume 150")),
-    Key(["control"], "Down", lazy.spawn("pulsemixer --change-volume -5 --max-volume 150")),
+    Key(["control"], "Up", lazy.spawn("amixer set Master 5%+")),
+    Key(["control"], "Down", lazy.spawn("amixer set Master 5%-")),
     ]
 
 
 #launcher short-keys
 keys.extend([
     Key([mod], "r", lazy.spawn("alacritty")),
-    # Key([mod], "a", lazy.spawn("flameshot gui")),
-    Key([mod], "a", lazy.spawn('grim -g "$(slurp)" - | wl-copy', shell=True) ),
-    Key([mod, "shift"], "a", lazy.spawn('grim -g "$(slurp)" - | swappy -f -', shell=True) ),
+    Key([mod], "a", lazy.spawn("flameshot gui")),
+    # Key([mod], "a", lazy.spawn('grim -g "$(slurp)" - | wl-copy', shell=True) ),
+    # Key([mod, "shift"], "a", lazy.spawn('grim -g "$(slurp)" - | swappy -f -', shell=True) ),
 
     Key([mod], "v", lazy.spawn("pavucontrol")),
     Key([mod], "Escape", lazy.spawn("xkill")),
@@ -52,9 +52,9 @@ keys.extend([
 
 #setting up the function keys
 keys.extend([
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pulsemixer --change-volume -5 --max-volume 150")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pulsemixer --change-volume +5 --max-volume 150")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q -D pulse set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")), 
@@ -66,3 +66,7 @@ keys.extend([
 
 
 
+keys.extend([
+    Key(["control","mod1"], "d", lazy.spawn("/home/raja/.screenlayout/desktop.sh")),
+    Key(["control","mod1"], "l", lazy.spawn("/home/raja/.screenlayout/laptop.sh")),
+])

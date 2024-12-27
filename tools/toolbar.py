@@ -15,51 +15,14 @@ style = {
     "padding": 5,
 }
 
-# vol_cur  = "amixer -D pulse get Master"
-# vol_up   = "amixer -q -D pulse sset Master 2%+"
-# vol_down = "amixer -q -D pulse sset Master 2%-"
-# mute     = "amixer -q -D pulse set Master toggle"
-
-
-
-
-icons = {
-    "logo": "",     # fa-redhat
-    "temp": "",     # fa-fire-extinguisher
-    "battery": "",  # fa-battery-three-quarters
-    "light": "",    # fa-lightbulb-o
-    "volume": "",   # fa-bullhorn
-    "rss": "",      # fa-rss
-    "sync": "",     # fa-sync-alt
-    "tasks": "",    # fa-calendar-check-o
-    "repeat": "",   # fa-repeat
-    "email": "",    # fa-at
-    "gmail": "",      # fa-google
-
-    "chat": "",      # fa-comment-dots
-    "web": "",      # fa-internet-explorer
-    "terminal": "", # fa-keyboard
-    "dev": "",      # fa-heart
-    "doc": "",      # fa-folder
-    "misc": "",     # fa-file
-    "ssh": "",      # fa-hashtag
-    "virtual": "", # fa-cogs
-    "games": "",     # fa-playstation
-    "music": "",    # fa-headphones
-
-    "max": "",       # fa-window-maximize
-    "monadtall": "", # fa-columns
-    "treetab": "",   # fa-tree
-
-    "systray": "",  # fa-fedora
-}
+vol_cur  = "amixer"
 
 def init_widgets_list_left():
     widgets_list = [
             widget.GroupBox(
-                    text=icons["logo"],
+                    text="",
                     font="Font Awesome",
-                    fontsize = 16,
+                    fontsize = 14,
                     margin_y = 5,
                     margin_x = 0,
                     padding_x = 15,
@@ -90,7 +53,7 @@ def init_widgets_list_left():
                 background=colors_1,
                 foreground=colors_3,
                 padding_x = 20,
-
+                fontsize = 12,
                 highlight_method="block",
                 border="#777777",
                 urgent_border="#ff0000",
@@ -138,7 +101,7 @@ def init_widgets_list_right():
 
             # Battery
             widget.TextBox(
-                text=icons["battery"],
+                text="",
                 foreground=colors_3,
                 font="Font Awesome",
                 fontsize = 14,
@@ -154,13 +117,13 @@ def init_widgets_list_right():
 
             # Volume
             widget.TextBox(
-                text=icons["volume"],
+                text="",
                 foreground=colors_3,
                 font="Font Awesome",
                 fontsize = 14,
             ),
             widget.Volume(
-                get_volume_command="amixer -D pulse get Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'",
+                get_volume_command=vol_cur, # "amixer -D pulse get Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'",
                 foreground=colors_5,
                 fontsize = 14,
             ),
