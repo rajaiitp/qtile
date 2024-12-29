@@ -13,8 +13,8 @@ keys = [
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "Tab", lazy.function(latest_group)),
     # Key([mod, "shift"], "r", lazy.restart()),
-    Key(["control"], "Left",lazy.layout.shrink_main()),
-    Key(["control"], "Right",lazy.layout.grow_main()),
+    Key([mod], "Equal",lazy.layout.shrink_main()),
+    Key([mod], "Minus",lazy.layout.grow_main()),
     Key([mod], "Space", lazy.layout.swap_main()),
     Key([mod], "Left", lazy.group.next_window()),
     Key([mod], "Right", lazy.group.prev_window()),
@@ -46,7 +46,7 @@ keys.extend([
     Key([mod], "c", lazy.spawn("code")),
     Key([mod, "shift"], "r", lazy.spawn("qtile cmd-obj -o cmd -f reload_config")),
     Key([mod], "g", lazy.spawn("google-chrome-stable")),
-    Key([mod], "l", lazy.spawn("physlock")),
+    Key([mod], "l", lazy.spawn("i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork ")),
 ])
 
 
@@ -59,8 +59,12 @@ keys.extend([
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")), 
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")), 
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")), 
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")), 
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 10+%")), 
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10-%")), 
+
+
+    # Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")), 
+    # Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")), 
 ])
 
 

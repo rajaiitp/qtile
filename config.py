@@ -60,7 +60,7 @@ def init_widgets_defaults():
 widget_defaults = init_widgets_defaults()
 
 def init_screens():
-    wall_loc = "/usr/share/backgrounds/archlinux-login-backgrounds/att-01.jpg"
+    wall_loc = "/usr/share/backgrounds/arcolinux-dual/beautiful-morning.png"
     main_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', top=bar.Bar(widgets=init_widgets_screen_tray(), size=20, opacity=1))]
     add_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', top=bar.Bar(widgets=init_widgets_screen(), size=20, opacity=1)) for _ in range(2)]
     return main_scr+add_scr
