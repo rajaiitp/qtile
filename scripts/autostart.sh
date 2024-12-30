@@ -8,7 +8,6 @@ function run {
 }
 
 run picom &
-run clipit -n &
 run redshift &
 run dunst &
 run nm-applet &
@@ -18,10 +17,9 @@ xss-lock --transfer-sleep-lock -- i3lock -i /usr/share/backgrounds/arcolinux-dua
 /usr/libexec/geoclue-2.0/demos/agent &
 
 
-
+# run clipit -n &
 # picom --config /etc/xdg/picom.conf &
 # xsetroot -cursor_name left_ptr &
-# 
 # numlockx on &
 # run nm-tray &
 # $HOME/.screenlayout/laptop.sh&

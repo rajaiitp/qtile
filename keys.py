@@ -1,11 +1,36 @@
 from libqtile.lazy import lazy
 from libqtile.config import Key
-
+from libqtile.log_utils import logger
+import time
 mod = "mod4"
 
 def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
+def find_or_run(app, wm_class):
+       
+    def __inner(qtile):
+
+        # Get the window objects from windows_map
+        for window in qtile.windows_map.values():
+
+
+            # Check if the window matches your desired class
+            if hasattr(window, "match") and window.match(Match(wm_class=wm_class)):
+
+                # Switch to the group where the window is
+                qtile.current_screen.set_group(window.group)
+
+                # Focus the window
+                window.focus(False)
+
+                # Exit the function
+                return
+
+        # If we're here, the app wasn't found so we launch it
+        qtile.spawn(app)
+
+    return __inner
 
 
 keys = [
@@ -28,7 +53,7 @@ keys = [
 
 #launcher short-keys
 keys.extend([
-    Key([mod], "r", lazy.spawn("alacritty")),
+    Key([mod], "r", lazy.function(find_or_run("alacritty","Alacritty"))),
     Key([mod], "a", lazy.spawn("flameshot gui")),
     # Key([mod], "a", lazy.spawn('grim -g "$(slurp)" - | wl-copy', shell=True) ),
     # Key([mod, "shift"], "a", lazy.spawn('grim -g "$(slurp)" - | swappy -f -', shell=True) ),
@@ -37,16 +62,20 @@ keys.extend([
     Key([mod], "Escape", lazy.spawn("xkill")),
     Key([mod], "i", lazy.spawn("firefox --private-window")),
     Key([mod], "b", lazy.spawn("firefox")),
-    Key([mod], "e", lazy.spawn("thunar")),
-    Key([mod], "k", lazy.spawn("slack")),
+    Key([mod], "e", lazy.function(find_or_run("thunar","thunar"))),
+    Key([mod], "k", lazy.function(find_or_run("slack","slack"))),
     Key([mod], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")),
     Key([mod], "s", lazy.spawn("subl")),
     Key([mod], "t", lazy.spawn("teams-for-linux")),
-    Key([mod], "o", lazy.spawn("obsidian")),
+    Key([mod], "o", lazy.function(find_or_run("obsidian","obsidian"))),
     Key([mod], "c", lazy.spawn("code")),
     Key([mod, "shift"], "r", lazy.spawn("qtile cmd-obj -o cmd -f reload_config")),
     Key([mod], "g", lazy.spawn("google-chrome-stable")),
-    Key([mod], "l", lazy.spawn("i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork ")),
+    Key([mod, "shift"], "l", lazy.spawn("i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork ")),
+    Key([mod, "shift"], "s", lazy.spawn("systemctl suspend")),
+    Key([mod, "shift"], "h", lazy.spawn("systemctl hibernate")),
+
+
 ])
 
 

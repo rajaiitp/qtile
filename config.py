@@ -26,22 +26,6 @@ match = [
 ["Alacritty","alacritty"]#0
 ]
 
-groups = []
-for i in range(len(group_names)):
-    out = '|'.join(match[i])
-    groups.append(Group(
-        name=group_names[i],
-        layout="monadtall".lower(),
-        label=group_labels[i],
-        matches=[Match(wm_class=re.compile(rf"^{out}$"))]
-    ))
-for index,i in enumerate(groups):
-    keys.extend([
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-        Key(["mod1"], i.name, lazy.window.togroup(i.name)),
-        Key(["control"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
-    ])
-
 layout_theme = {
     "margin":5,
     "border_focus": "#fab387",
@@ -50,6 +34,24 @@ layout_theme = {
 layouts = [
     layout.MonadThreeCol(**layout_theme,ratio=0.5, single_border_width=0, border_width=1),
 ]
+
+
+groups = []
+for i in range(len(group_names)):
+    groups.append(Group(
+        name=group_names[i],
+        # layout= layout.MonadThreeCol(**layout_theme,ratio=0.5, single_border_width=0, border_width=1),
+        label=group_labels[i],
+        matches=[Match(wm_class=re.compile(rf"^{'|'.join(match[i])}$"))]
+    ))
+for index,i in enumerate(groups):
+    keys.extend([
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key(["mod1"], i.name, lazy.window.togroup(i.name)),
+        Key(["control"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
+    ])
+
+
 
 def init_widgets_defaults():
     return dict(font="Noto Sans Bold",
