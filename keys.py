@@ -2,6 +2,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Key
 from libqtile.log_utils import logger
 import time
+from libqtile.config import Match
 mod = "mod4"
 
 def latest_group(qtile):
@@ -88,8 +89,8 @@ keys.extend([
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")), 
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")), 
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 10+%")), 
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10-%")), 
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 5+%")), 
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5-%")), 
 
 
     # Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")), 
@@ -102,4 +103,6 @@ keys.extend([
 keys.extend([
     Key(["control","mod1"], "d", lazy.spawn("/home/raja/.screenlayout/desktop.sh")),
     Key(["control","mod1"], "l", lazy.spawn("/home/raja/.screenlayout/laptop.sh")),
+    Key(["control","mod1"], "p", lazy.spawn("/home/raja/.screenlayout/pasqal.sh")),
+
 ])

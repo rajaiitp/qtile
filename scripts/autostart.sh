@@ -12,9 +12,9 @@ run redshift &
 run dunst &
 run nm-applet &
 /usr/libexec/xfce-polkit &
-xset s off -dpms &
 xss-lock --transfer-sleep-lock -- i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork  &
-/usr/libexec/geoclue-2.0/demos/agent &
+xset s off -dpms &
+# /usr/libexec/geoclue-2.0/demos/agent &
 
 
 # run clipit -n &
