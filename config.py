@@ -5,7 +5,7 @@ from libqtile import layout, bar, hook
 from libqtile.config import Drag, Group, Key, Match, Screen
 from tools.monitor import *
 from libqtile.lazy import lazy
-from libqtile.backend.wayland import InputConfig
+#from libqtile.backend.wayland import InputConfig
 import keys
 
 mod = "mod4"
@@ -16,23 +16,23 @@ colors_5 = "#cccccc"
 colors_9 = "#555555"
 keys = keys.keys
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8","9","0"]
-group_labels = ["-1", "-2", "-3", "-4","-5", "-6","-7","-8","-9","-0"]
+group_labels = ["", "", "", "","", "","","","",""]
 match = [
 [""],[""],[""],[""],#1,2,3,4
-["sublime_text", "Sublime_text","obsidian", "Obsidian"],[""],#5,6
+["sublime_text", "Sublime_text","obsidian", "Obsidian"],["slack"],#5,6
 ["thunar", "Thunar"],#7
 ["google-chrome", "Google-chrome"],#8
-["teams-for-linux","slack"],#9
+["teams-for-linux"],#9
 ["Alacritty","alacritty"]#0
 ]
 
 layout_theme = {
     "margin":5,
-    "border_focus": "#fab387",
-    "border_normal": "#000000",
+    "border_focus": "#fab300",
+    "border_normal": "#777777",
 }
 layouts = [
-    layout.MonadThreeCol(**layout_theme,ratio=0.5, single_border_width=0, border_width=1),
+    layout.MonadThreeCol(**layout_theme,ratio=0.5, single_border_width=0, border_width=2),
 ]
 
 
@@ -54,17 +54,18 @@ for index,i in enumerate(groups):
 
 
 def init_widgets_defaults():
-    return dict(font="Noto Sans Bold",
-                fontsize = 14,
+    return dict(font="Inter Medium",
+                fontsize = 15,
                 padding = 2,
                 background=colors_1)
 
 widget_defaults = init_widgets_defaults()
-
+fix = 5
+margin=[0, fix, fix, fix]
 def init_screens():
-    wall_loc = "/usr/share/backgrounds/arcolinux-dual/beautiful-morning.png"
-    main_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', top=bar.Bar(widgets=init_widgets_screen_tray(), size=20, opacity=1))]
-    add_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', top=bar.Bar(widgets=init_widgets_screen(), size=20, opacity=1)) for _ in range(2)]
+    wall_loc = "/usr/share/backgrounds/arcolinux-dual/wall.jpg"
+    main_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', bottom=bar.Bar(widgets=init_widgets_screen_tray(), size=24, opacity=1))]
+    add_scr = [Screen(wallpaper =wall_loc, wallpaper_mode = 'fill', bottom=bar.Bar(widgets=init_widgets_screen(), size=24, opacity=1)) for _ in range(2)]
     return main_scr+add_scr
 screens = init_screens()
 
@@ -103,14 +104,14 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='feh'),
     Match(wm_class='archlinux-logout'),
     Match(wm_class='pavucontrol'),
-],  fullscreen_border_width = 0, border_width = 0, border_focus=colors_3)
+],  fullscreen_border_width = 0, border_width = 2, border_focus="#fab300",border_normal="#fab300",)
 
 
 
-wl_input_rules = {
-    "type:keyboard": InputConfig(dwt=True, kb_variant="altgr-intl", kb_layout="us"),
-    "*": InputConfig(tap=True, natural_scroll=True),
-}
+#wl_input_rules = {
+#    "type:keyboard": InputConfig(dwt=True, kb_variant="altgr-intl", kb_layout="us"),
+#    "*": InputConfig(tap=True, natural_scroll=True),
+#}
 auto_fullscreen = False
 follow_mouse_focus = True
 bring_front_click = False

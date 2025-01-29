@@ -12,11 +12,14 @@ run redshift &
 run dunst &
 run nm-applet &
 /usr/libexec/xfce-polkit &
-xss-lock --transfer-sleep-lock -- i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork  &
+run seapplet &
 xset s off -dpms &
-# /usr/libexec/geoclue-2.0/demos/agent &
+/usr/libexec/geoclue-2.0/demos/agent &
+# xset s 300 &
+xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock &
 
 
+# xss-lock --transfer-sleep-lock -- i3lock -i /usr/share/backgrounds/arcolinux-dual/wall.png --nofork  &
 # run clipit -n &
 # picom --config /etc/xdg/picom.conf &
 # xsetroot -cursor_name left_ptr &

@@ -55,6 +55,10 @@ keys = [
 #launcher short-keys
 keys.extend([
     Key([mod], "r", lazy.function(find_or_run("alacritty","Alacritty"))),
+    Key([mod], "return", lazy.spawn("alacritty")),
+    Key([mod], "g", lazy.function(find_or_run("google-chrome-stable","google-chrome"))),
+
+    # Key([mod], "g", lazy.spawn("google-chrome-stable")),
     Key([mod], "a", lazy.spawn("flameshot gui")),
     # Key([mod], "a", lazy.spawn('grim -g "$(slurp)" - | wl-copy', shell=True) ),
     # Key([mod, "shift"], "a", lazy.spawn('grim -g "$(slurp)" - | swappy -f -', shell=True) ),
@@ -71,8 +75,7 @@ keys.extend([
     Key([mod], "o", lazy.function(find_or_run("obsidian","obsidian"))),
     Key([mod], "c", lazy.spawn("code")),
     Key([mod, "shift"], "r", lazy.spawn("qtile cmd-obj -o cmd -f reload_config")),
-    Key([mod], "g", lazy.spawn("google-chrome-stable")),
-    Key([mod, "shift"], "l", lazy.spawn("i3lock -i /usr/share/backgrounds/arcolinux-dual/beautiful-morning.png --nofork ")),
+    Key([mod, "shift"], "l", lazy.spawn("xsecurelock")),
     Key([mod, "shift"], "s", lazy.spawn("systemctl suspend")),
     Key([mod, "shift"], "h", lazy.spawn("systemctl hibernate")),
 
