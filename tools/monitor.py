@@ -9,7 +9,7 @@ colors_9 = "#555555"
 def init_widgets_screen_tray():
 
     # widgets_screen.append(b)
-    return init_widgets_list_left() + init_tray() + init_widgets_list_right()
+    return init_tray() + init_widgets_list_left() + init_widgets_list_right()
 
 def init_widgets_screen():
     return init_widgets_list_left() + init_widgets_list_right()

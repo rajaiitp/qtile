@@ -69,7 +69,7 @@ keys.extend([
     Key([mod], "b", lazy.spawn("firefox")),
     Key([mod], "e", lazy.function(find_or_run("thunar","thunar"))),
     Key([mod], "k", lazy.function(find_or_run("slack","slack"))),
-    Key([mod], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")),
+    Key([mod], "d", lazy.spawn("dmenu_run -i -b -nf '#fea63c' -sb '#fea63c' -fn 'Inter:medium:pixelsize=14'")),
     Key([mod], "s", lazy.spawn("subl")),
     Key([mod], "t", lazy.spawn("teams-for-linux")),
     Key([mod], "o", lazy.function(find_or_run("obsidian","obsidian"))),

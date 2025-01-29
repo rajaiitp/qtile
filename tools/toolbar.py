@@ -24,9 +24,21 @@ vol_cur  = "amixer"
 
 def init_widgets_list_left():
     widgets_list = [
+            widget.TextBox(
+                text="⏻",
+                mouse_callbacks={
+                    "Button1": lambda: qtile.cmd_spawn(
+                        os.path.expanduser("~/.config/rofi/powermenu.sh")
+                    )
+                },
+                foreground="#ff0000",
+                font="Inter Medium",
+                fontsize=20,
+                margin_y= -2,   
+                padding=3,
+            ),
 
 
-            widget.Sep(**sep),
 
 
             widget.TaskList(
@@ -38,26 +50,27 @@ def init_widgets_list_left():
                 foreground=colors_3,
                 padding_x = 10,
                 fontsize = 17,
-                margin_x = 40,
+                margin_x = 20,
                 margin_y= -2,
-                txt_minimized="",
                 highlight_method="block",
                 rounded = False,
                 border="#777777",
                 urgent_border="#ff0000",
                 title_width_method="uniform",
                 theme_mode = 'preferred',
-                theme_path = '/usr/share/icons/hicolor',
-                icons_only=True
+                theme_path = '/usr/share/icons/Papirus',
+                icons_only=True,
+                txt_maximized= "",
+                txt_floating= "",
+                txt_minimized ="",
             ),
 
             widget.GroupBox(
-                    text="",
                     font="Inter Medium",
-                    fontsize = 17,
+                    fontsize = 19,
                     margin_y = 3,
-                    margin_x = 0,
-                    padding_x = 20,
+                    margin_x = 15,
+                    padding_x = 15,
                     borderwidth = 0,
                     disable_drag = True,
                     active = colors_3,
@@ -78,6 +91,9 @@ def init_widgets_list_left():
                 icon_size=0,
                 font="Inter Medium",
                 border="#000000",
+                txt_maximized= "",
+                txt_floating= "",
+                txt_minimized ="",
             ),
         ]
     return widgets_list
